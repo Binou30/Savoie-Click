@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="static/style.css">
   </head>
   <body>
+    <div class="message-mobile" id="message-mobile">
+      <p>Ce site est optimisé pour ordinateur.<br>Reviens depuis un PC pour jouer !</p>
+    </div>
     <h1><u>Bienvenue sur Savoie Click !</u></h1>
     <p class="sous-titre">Un petit jeu que j'ai créé sur Scratch, jouable directement ici sans passer par le site officiel. Pratique !</p>
     <div class="mise-en-page">
@@ -28,5 +31,12 @@
         </aside>
     </div>
     <p class="copyright">©2026 - Alban DOINEL</p>
+    <script>
+      const seuilOrdi = 1024;
+      if (window.innerWidth < seuilOrdi) {
+        document.body.classList.add('mobile-bloque');
+        document.getElementById('message-mobile').classList.add('actif');
+      }
+    </script>
   </body>
 </html>

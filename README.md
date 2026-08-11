@@ -5,3 +5,7 @@ Bienvenue dans ce projet simple ayany pour seul but de pouvoir accéder plus fac
 ## Mode d'emplois :
 
 Pour accéder à la page, cliquez tout simplement sur ce lien : https://savoie-click.publigame.inovaperf.me
+
+## Note :
+
+Ne pas utilisre sur

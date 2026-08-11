@@ -213,6 +213,32 @@ iframe {
     animation: deroulement 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.6s both;
 }
 
+.message-mobile {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(160deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    color: var(--cream);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6vh 8vw;
+    z-index: 999;
+}
+
+.message-mobile p {
+    font-size: clamp(1.1rem, 5vw, 1.6rem);
+    line-height: 1.6;
+}
+
+.message-mobile.actif {
+    display: flex;
+}
+
+body.mobile-bloque > *:not(.message-mobile) {
+    display: none;
+}
+
 @media (max-width: 900px) {
     .mise-en-page {
         flex-direction: column;
