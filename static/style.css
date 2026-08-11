@@ -27,6 +27,7 @@ html, body {
     text-align: center;
     gap: 3vh;
     overflow-x: hidden;
+    position: relative;
 }
 
 .mise-en-page {
@@ -239,18 +240,167 @@ body.mobile-bloque > *:not(.message-mobile) {
     display: none;
 }
 
+/* ===================== */
+/*   BURGER MENU (savoie click) */
+/* ===================== */
+
+.burger-savoie-click {
+    display: none;
+    position: fixed;
+    top: 3vh;
+    right: 4vw;
+    z-index: 1001;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.35));
+    border: 2px solid var(--dusty-rose-dark);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+    animation: deroulement 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.burger-savoie-click:hover {
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--dusty-rose);
+    transform: translateY(-2px);
+}
+
+.burger-savoie-click span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--cream);
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+                opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+                background-color 0.3s ease;
+}
+
+.burger-savoie-click:active span,
+.burger-savoie-click.clique span {
+    background: var(--dusty-rose);
+}
+
+.burger-savoie-click.ouvert span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.burger-savoie-click.ouvert span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.burger-savoie-click.ouvert span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.panneau-boxes {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: min(88vw, 320px);
+    background: linear-gradient(180deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    border-radius: 14px 0 0 14px;
+    z-index: 1000;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 2.5vh;
+    padding: 12vh 5vw 4vh;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.panneau-boxes.ouvert {
+    transform: translateX(0);
+}
+
+.panneau-boxes .box-laterale {
+    max-width: none;
+    width: 100%;
+    flex: none;
+    align-self: auto;
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+                transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.panneau-boxes .box-notes {
+    transform: translateX(40px);
+}
+
+.panneau-boxes.ouvert .box-instructions {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.15s;
+}
+
+.panneau-boxes.ouvert .box-notes {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.3s;
+}
+
+.fond-panneau {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.fond-panneau.ouvert {
+    opacity: 1;
+}
+
+/* Seuil : les deux box + l'iframe ne tiennent plus alignés horizontalement */
 @media (max-width: 900px) {
     .mise-en-page {
-        flex-direction: column;
+        justify-content: center;
     }
-    .box-laterale {
-        max-width: 480px;
-        width: 90vw;
+
+    .mise-en-page .box-laterale.box-instructions,
+    .mise-en-page .box-laterale.box-notes {
+        display: none;
+    }
+
+    .burger-savoie-click,
+    .panneau-boxes,
+    .fond-panneau {
+        display: flex;
+    }
+
+    .panneau-boxes:not(.ouvert),
+    .fond-panneau:not(.ouvert) {
+        pointer-events: none;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    h1, p.sous-titre, .conteneur-jeu, .box-laterale, .copyright {
+    h1, p.sous-titre, .conteneur-jeu, .box-laterale, .copyright, .burger-savoie-click {
         animation: none;
+    }
+    .panneau-boxes,
+    .burger-savoie-click span,
+    .panneau-boxes .box-laterale {
+        transition: none;
+    }
+    .panneau-boxes .box-laterale {
+        opacity: 1;
+        transform: none;
     }
 }
