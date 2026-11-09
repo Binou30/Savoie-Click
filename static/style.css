@@ -449,3 +449,16 @@ body.mobile-bloque > *:not(.message-mobile) {
         transform: none;
     }
 }
+
+#conteneur-jeu {
+    position: relative !important;
+}
+
+#conteneur-jeu > .bouton-plein-ecran {
+    position: absolute !important;
+    top: auto !important;
+    left: auto !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    z-index: 1000 !important;
+}
