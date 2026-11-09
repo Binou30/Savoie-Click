@@ -173,7 +173,8 @@ p.sous-titre {
 
 iframe {
     width: min(90vw, 480px);
-    height: min(70vw, 360px);
+    height: auto;
+    aspect-ratio: 485 / 402;
     border: none;
     border-radius: 8px;
     display: block;
